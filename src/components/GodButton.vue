@@ -13,6 +13,7 @@ export default {
     type: String,
     url: String,
     method: String,
+    params: String,
     click : [Function, String],
     loader: Boolean
   },
@@ -47,12 +48,6 @@ export default {
       window.open(url);
     },
 
-    methodBehaviour(method = "emptyMethod", is_loader) {
-      this.show_loader = is_loader;
-      console.log("this[method]", this[method]);
-      console.log("this['m2ethod']", this["m2ethod"]);
-      this[method]();
-    },
     justButtonBehavior (e) {
       if (this.click) {
         if (typeof this.click === 'function') {
@@ -64,6 +59,27 @@ export default {
       }
       //this.$emit('click', e);
       this.dispatchJsEvent(e);
+    },
+
+    methodBehaviour(method = "emptyMethod", is_loader) {
+      let method_params = this.checkForMethodParams(this.params);
+      this.show_loader = is_loader;
+
+      if (this[method]) {
+        this[method](method_params);
+      } else {
+        window[method](method_params);
+      }
+    },
+
+    checkForMethodParams(params) {
+      let params_object = false;
+
+      if (params) {
+        params_object = JSON.parse(params);
+      }
+
+      return params_object;
     },
 
     emptyMethod() {

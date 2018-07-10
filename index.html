@@ -37,12 +37,38 @@
 				method="changeBgColor"
 				loader></GodButton>
 		</section>
+
+		<section>
+			<VueButton
+				text="Запускаем стороннюю функцию"
+				type="method"
+				method="simpleExternalFunction"></VueButton>
+		</section>
+
+		<section>
+			<VueButton
+				text='Запускаем стороннюю функцию с параметром'
+				type='method'
+				method='simpleExternalFunction'
+				params='{"string": "Хватит спорить по поводу кнопок!!"}'></VueButton>
+		</section>
+
+
+		<section>
+			<h3>Результат выполнения сторонней функции:</h3>
+			<div id="external_result"></div>
+		<section>
 	</div>
 	<!-- built files will be auto injected -->
 	<script>
-		function simpleExternalFunction() {
-			console.log("simpleExternalFunction");
-			console.log("window", window);
+		const random_string = () => {
+			return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+		}
+
+		function simpleExternalFunction(data) {
+			let result_string = (data.string) ? data.string : random_string();
+
+			external_result.innerHTML = result_string;
 		}
 	</script>
 </body>
