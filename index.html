@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>vue-god-button</title>
+</head>
+
+<body>
+	<div id="app">
+		<h1>Пример работы компонента кнопок</h1>
+		<section>
+			<VueButton
+				text="Переход по ссылке"
+				type="link"
+				url="https://ru.vuejs.org/"></VueButton>
+		</section>
+
+		<section>
+			<VueButton
+				text="Меняем фон у body"
+				type="method"
+				method="changeBgColor"></VueButton>
+		</section>
+
+		<section>
+			<VueButton
+				text="Меняем фон у body с лоадером"
+				type="method"
+				method="changeBgColor"
+				loader></VueButton>
+		</section>
+	</div>
+	<!-- built files will be auto injected -->
+	<script>
+		function simpleExternalFunction() {
+			console.log("simpleExternalFunction");
+			console.log("window", window);
+		}
+	</script>
+</body>
+
+</html>
