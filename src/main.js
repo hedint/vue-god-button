@@ -7,7 +7,7 @@ import GodButton from "./components/GodButton.vue";
 Vue.use(Vuex);
 Vue.config.productionTip = false;
 
-Vue.component("GodButton", GodButton);
+Vue.component("godbutton", GodButton);
 
 /* eslint-disable no-new */
 const app = new Vue({
