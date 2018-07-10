@@ -1,6 +1,7 @@
 # vue-god-button
 
-> A Vue.js project
+It's not just a button. IT'S F**ING GOD BUTTON
+
 
 ## Build Setup
 
