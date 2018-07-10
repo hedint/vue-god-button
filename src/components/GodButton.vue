@@ -13,6 +13,7 @@ export default {
     type: String,
     url: String,
     method: String,
+    click : [Function, String],
     loader: Boolean
   },
 
@@ -23,9 +24,8 @@ export default {
   },
 
   methods: {
-    eventHandler() {
+    eventHandler(e) {
       if (this.show_loader) return;
-
       switch (this.type) {
         case "link":
           this.linkBehaviour(this.url);
@@ -33,7 +33,14 @@ export default {
         case "method":
           this.methodBehaviour(this.method, this.loader);
           break;
+        case "just_button":
+          this.justButtonBehavior(e);
       }
+    },
+
+    dispatchJsEvent (e) {
+      var event = new CustomEvent ("god_button_click", {detail : {e}});
+      document.dispatchEvent(event);
     },
 
     linkBehaviour(url) {
@@ -45,6 +52,18 @@ export default {
       console.log("this[method]", this[method]);
       console.log("this['m2ethod']", this["m2ethod"]);
       this[method]();
+    },
+    justButtonBehavior (e) {
+      if (this.click) {
+        if (typeof this.click === 'function') {
+          this.click();
+        }
+        if (typeof this.click === 'string') {
+          window[this.click](e);
+        }
+      }
+      //this.$emit('click', e);
+      this.dispatchJsEvent(e);
     },
 
     emptyMethod() {
