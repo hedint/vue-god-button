@@ -13,6 +13,7 @@
 		<section>
 			<GodButton
 				text="Переход по ссылке"
+				no_enter
 				type="link"
 				url="https://ru.vuejs.org/"></GodButton>
 		</section>
@@ -21,6 +22,10 @@
 				text="Внешний метод вне vue"
 				type="just_button"
 				click="simpleExternalFunction"></GodButton>
+			<GodButton
+				text="Внешний метод вне vue инлайн функция"
+				type="just_button"
+				click="(e) => { console.log(e);}"></GodButton>
 		</section>
 
 		<section>

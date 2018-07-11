@@ -1,5 +1,5 @@
 <template>
-  <button class="btn" :class="{'btn--loader': show_loader}" @click="eventHandler">
+  <button class="btn" :class="{'btn--loader': show_loader}" @click="eventHandler" @keypress="eventKeyPressHandler">
     {{ text }}
   </button>
 </template>
@@ -10,6 +10,7 @@ export default {
 
   props: {
     text: String,
+    no_enter : Boolean,
     type: String,
     url: String,
     method: String,
@@ -37,9 +38,16 @@ export default {
           this.justButtonBehavior(e);
       }
     },
+    eventKeyPressHandler (e) {
+      if (e.keyCode === 13 && this.no_enter) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+
+    },
 
     dispatchJsEvent (e) {
-      var event = new CustomEvent ("god_button_click", {detail : {e}});
+      const event = new CustomEvent ("god_button_click", {detail : {e}});
       document.dispatchEvent(event);
     },
 
@@ -59,7 +67,11 @@ export default {
           this.click();
         }
         if (typeof this.click === 'string') {
-          window[this.click](e);
+          try {
+            eval(this.click)(e);
+          } catch (err) {
+            window[this.click](e);
+          }
         }
       }
       //this.$emit('click', e);
